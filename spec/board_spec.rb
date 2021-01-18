@@ -1,4 +1,4 @@
-require './lib/game'
+require './lib/board.rb'
 
 describe Board do
   context 'creating board' do
