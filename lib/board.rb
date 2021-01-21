@@ -27,6 +27,10 @@ class Board
     @board[col - 1].count(' ').positive?
   end
 
+  def game_over?
+    true if [win_row?, win_col?, win_diagonal_up_left?, win_diagonal_up_right?, draw?].any?(true)
+  end
+
   def win_col?
     3.times do |y|
       7.times do |x|
@@ -73,6 +77,8 @@ class Board
 
   def draw?
     return true if @board.none?(' ')
+
+    false
   end
 end
 
