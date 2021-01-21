@@ -28,7 +28,16 @@ class Board
   end
 
   def game_over?
-    true if [win_row?, win_col?, win_diagonal_up_left?, win_diagonal_up_right?, draw?].any?(true)
+    if [win_row?, win_col?, win_diagonal_up_left?, win_diagonal_up_right?, draw?].any?('X')
+      puts 'X win\'s!'
+    elsif [win_row?, win_col?, win_diagonal_up_left?, win_diagonal_up_right?, draw?].any?('O')
+      puts 'O win\'s!'
+    elsif draw? == true
+      puts 'It\'s a draw!'
+    else
+      return false
+    end
+    true
   end
 
   def win_col?
@@ -76,20 +85,8 @@ class Board
   end
 
   def draw?
-    return true if @board.none?(' ')
-
-    false
+    if @board.flatten.none?(' ')
+      return true
+    end
   end
 end
-
-set = Board.new
-6.times { set.drop_piece('O', 7) }
-5.times { set.drop_piece('O', 6) }
-4.times { set.drop_piece('O', 5) }
-set.drop_piece('X', 4)
-2.times { set.drop_piece('O', 4) }
-4.times { set.drop_piece('X', 1) }
-3.times { set.drop_piece('X', 2) }
-2.times { set.drop_piece('X', 3) }
-
-set.display_board

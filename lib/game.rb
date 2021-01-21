@@ -1,11 +1,10 @@
-require 'board.rb'
-require 'player.rb'
+require './lib/board.rb'
+require './lib/player.rb'
 
 class Game
-  attr_accessor :human, :set, :human_piece, :comp_piece
+  attr_accessor :human, :set, :human_piece, :comp_piece, :human_name
   def initialize
     @set = Board.new
-    name
   end
 
   def name
@@ -14,7 +13,6 @@ class Game
       @human_name = gets.chomp.to_s
       break if @human_name.size < 20
     end
-    piece
   end
 
   def piece
@@ -23,19 +21,16 @@ class Game
       @human_piece = gets.chomp.to_s
       break if @human_piece == 'X' || @human_piece == 'O'
     end
-    name_and_piece
   end
 
   def name_and_piece
     @human = Player.new(@human_name, @human_piece)
-    comp
   end
 
   def comp
     @comp_piece = 'O' if @human_piece == 'X'
     @comp_piece = 'X' if @human_piece == 'O'
     @comp = Player.new('Computron', @comp_piece)
-    game_loop
   end
 
   def comp_move
@@ -57,10 +52,15 @@ class Game
     loop do
       player_move
       comp_move
-      display_board
+      set.display_board
       break if @set.game_over?
     end
   end
 end
 
-gamerz = Game.new
+games = Game.new
+games.name
+games.piece
+games.name_and_piece
+games.comp
+games.game_loop

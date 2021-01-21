@@ -82,7 +82,7 @@ describe Board do
     puts "\n\n"
 
     describe '#draw?' do
-      it { should be_draw }
+      it { should_not be_draw }
 
       it 'should be a draw, when no more spots and no winner.' do
         subject.board.map! { |col| col.map! {'e'}}
